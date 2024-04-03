@@ -1,0 +1,2 @@
+# InitServer
+easy init server
