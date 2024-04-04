@@ -8,6 +8,22 @@ docker-compose version
 
 # docker镜像加速
 touch /etc/docker/daemon.json
-echo '{"registry-mirrors": ["http://hub-mirror.c.163.com"]}' > /etc/docker/daemon.json
+#echo '{"registry-mirrors": ["http://hub-mirror.c.163.com"]}' > /etc/docker/daemon.json
+
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-EOF
+{
+    "registry-mirrors": [
+        "https://dockerproxy.com",
+        "https://mirror.baidubce.com",
+        "https://docker.m.daocloud.io",
+        "https://docker.nju.edu.cn",
+        "https://docker.mirrors.sjtug.sjtu.edu.cn"
+    ]
+}
+EOF
+systemctl daemon-reload
+systemctl restart docker
+
 
 systemctl restart docker.service
